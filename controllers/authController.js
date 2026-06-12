@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 
 // REGISTER
 exports.register = async (req, res) => {
+  try{
   const hashed = await bcrypt.hash(req.body.password, 10);
 
   await User.create({
@@ -13,10 +14,14 @@ exports.register = async (req, res) => {
   });
 
   res.redirect("/auth/login");
+  }catch(err){
+    console.log(err);
+  }
 };
 
 // LOGIN
 exports.login = async (req, res) => {
+  try{
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) return res.send("User not found");
@@ -29,4 +34,7 @@ exports.login = async (req, res) => {
 
   res.cookie("token", token);
   res.redirect("/");
+  }catch(err){
+    console.log(err);
+  }
 };

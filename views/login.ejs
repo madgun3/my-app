@@ -1,5 +1,11 @@
+<% if (errors && errors.length > 0) { %>
+  <% errors.forEach(err => { %>
+    <p style="color:red;"><%= err.msg %></p>
+  <% }) %>
+<% } %>
+
 <form method="POST" action="/auth/login">
-  <input name="email" placeholder="Email" />
-  <input name="password" type="password" placeholder="Password" />
+  <input type="email" name="email" placeholder="Email">
+  <input type="password" name="password" placeholder="Password">
   <button>Login</button>
 </form>
